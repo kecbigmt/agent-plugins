@@ -1,24 +1,46 @@
-# kecbigmt's Claude Code Plugins
+# kecbigmt's Agent Plugins
 
-A collection of Claude Code plugins.
+A collection of plugins for Claude Code and Codex.
 
 ## Installation
 
-### From Marketplace (Recommended)
+### Claude Code marketplace
 
 ```bash
 # Add the marketplace
-/plugin marketplace add kecbigmt/cc-plugins
+/plugin marketplace add kecbigmt/agent-plugins
 
 # Install the story-driven plugin
 /plugin install story-driven@kecbigmt-plugins
 ```
+
+### Codex 0.162+ marketplace
+
+```bash
+codex plugin marketplace add kecbigmt/agent-plugins
+codex plugin add review-diagrams@kecbigmt-plugins
+```
+
+The verified Codex catalog is `.agents/plugins/marketplace.json`. It points to `plugins/review-diagrams`, whose `.codex-plugin/plugin.json` declares `"skills": "./skills/"`. Claude Code uses `.claude-plugin/marketplace.json` and the plugin's `.claude-plugin/plugin.json`; both hosts load the same `skills/review-diagrams/SKILL.md`.
+
+Codex supports project plugin enabling for trusted repos through `.codex/config.toml`:
+
+```toml
+[plugins."review-diagrams@kecbigmt-plugins"]
+enabled = true
+```
+
+Set `enabled = false` to disable it for that project. The marketplace and plugin still need to be installed once using the commands above. See the [official Codex plugin documentation](https://developers.openai.com/plugins/build/plugins#enable-or-disable-a-plugin-for-a-repo).
 
 ## Plugins
 
 ### story-driven
 
 Story-driven Development workflow plugin for Claude Code. Provides skills and commands for user story creation, acceptance criteria, verification, and story log management.
+
+### review-diagrams
+
+The shared `review-diagrams` skill creates SVG decision diagrams for ADRs and change diagrams for substantial PRs. It checks claims against the source, labels flows, and makes before/after changes easy to review. Tiny PRs can skip a diagram.
 
 ### codex
 
@@ -29,8 +51,8 @@ Codex CLI integration for autonomous code analysis, reviews, and codebase querie
 To test plugins during development:
 
 ```bash
-git clone https://github.com/kecbigmt/cc-plugins.git
-claude --plugin-dir ./cc-plugins/plugins/story-driven
+git clone https://github.com/kecbigmt/agent-plugins.git
+claude --plugin-dir ./agent-plugins/plugins/story-driven
 ```
 
 Restart Claude Code after making changes to pick up updates.
