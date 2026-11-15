@@ -15,4 +15,4 @@ Use SVG text elements with deliberate line breaks; do not rely on collapsed whit
 
 Put `## Overview` at the top of the PR body, embedding each diagram through a `raw.githubusercontent.com/<owner>/<repo>/<full-commit-SHA>/<path>` URL. Refresh the SHA and URLs after every push.
 
-Before sharing, review: Are all claims supported? Are chosen, rejected, deferred, and superseded states distinct? Are boundaries and every arrow clear? Are before/after and add/change/remove labels correct? Is text legible at normal zoom in both themes? Do paths, embeds, and pinned PR URLs resolve?
+Before sharing, review: Are all claims supported? Are chosen, rejected, deferred, and superseded states distinct? Are boundaries and every arrow clear, with no crossed arrows or labels clipped by boxes? Are before/after and add/change/remove labels correct? Is text legible at normal zoom in both themes? Do paths, embeds, and pinned PR URLs resolve?

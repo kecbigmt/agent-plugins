@@ -12,6 +12,9 @@ A collection of plugins for Claude Code and Codex.
 
 # Install the story-driven plugin
 /plugin install story-driven@kecbigmt-plugins
+
+# Install the review-diagrams plugin
+/plugin install review-diagrams@kecbigmt-plugins
 ```
 
 ### Codex 0.162+ marketplace
