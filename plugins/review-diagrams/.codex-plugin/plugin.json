@@ -1,0 +1,6 @@
+{
+  "name": "review-diagrams",
+  "version": "1.0.0",
+  "description": "Create evidence-based SVG decision and change diagrams for reviews.",
+  "skills": "./skills/"
+}
