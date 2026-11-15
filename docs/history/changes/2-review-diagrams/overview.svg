@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 650" role="img" aria-labelledby="title desc">
+  <title id="title">Review diagrams plugin: repository before and after PR 2</title>
+  <desc id="desc">Before, the repository listed Claude Code plugins and used cc-plugins URLs. After, the Claude and Codex catalogs both point to the new review-diagrams plugin, with one shared skill. The marketplace name stays kecbigmt-plugins.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker>
+    <style>
+      text { font-family: system-ui, sans-serif; fill: #0f172a; }
+      .title { font-size: 29px; font-weight: 700; }
+      .heading { font-size: 23px; font-weight: 700; }
+      .body { font-size: 18px; }
+      .small { font-size: 16px; }
+      .arrow { stroke: #334155; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1120" height="650" fill="#fff"/>
+  <text class="title" x="40" y="52">PR 2 · review diagrams across Claude Code and Codex</text>
+  <text class="small" x="40" y="83">Blue = changed · green = added · red = removed</text>
+  <text class="heading" x="40" y="140">Before</text>
+  <text class="heading" x="600" y="140">After</text>
+  <rect x="40" y="165" width="445" height="130" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+  <text class="body" x="60" y="202">Changed · Claude marketplace only</text>
+  <text class="body" x="60" y="235">Name: kecbigmt-plugins</text>
+  <text class="small" x="60" y="266">Existing Claude plugins listed</text>
+  <rect x="40" y="325" width="445" height="125" rx="12" fill="#fee2e2" stroke="#b91c1c" stroke-width="2"/>
+  <text class="body" x="60" y="363">Removed · cc-plugins URLs</text>
+  <text class="small" x="60" y="394">README install and manifest repository links</text>
+  <text class="small" x="60" y="421">pointed to the old repository name</text>
+  <path class="arrow" d="M485 225 H 555 V 225 H 600"/>
+  <text class="small" x="503" y="210">extended</text>
+  <rect x="600" y="165" width="480" height="130" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/>
+  <text class="body" x="620" y="202">Changed · Claude catalog adds plugin</text>
+  <text class="body" x="620" y="235">Name stays kecbigmt-plugins</text>
+  <text class="small" x="620" y="266">agent-plugins URLs; existing entries stay</text>
+  <rect x="600" y="325" width="480" height="125" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+  <text class="body" x="620" y="363">Added · Codex catalog and manifest</text>
+  <text class="small" x="620" y="394">Codex install resolves review-diagrams</text>
+  <text class="small" x="620" y="421">and its shared skill directory</text>
+  <rect x="600" y="485" width="480" height="125" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+  <text class="body" x="620" y="523">Added · one review-diagrams SKILL.md</text>
+  <text class="small" x="620" y="554">Decision and change SVG guidance</text>
+  <text class="small" x="620" y="581">used by both plugin manifests</text>
+  <path class="arrow" d="M830 450 V 485"/>
+  <text class="small" x="842" y="475">manifest loads skill</text>
+</svg>
