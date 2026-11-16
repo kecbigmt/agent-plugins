@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 592" width="960" height="592" role="img" aria-labelledby="title desc">
+  <title id="title">Change: Step Y replaces Step X (sample)</title>
+  <desc id="desc">Sample change diagram with placeholder content. Before: the Entry point passes input to Step X, which writes the result to the Store. After: the Entry point passes input to the added Step Y, which writes the result and a new field to the changed Store; Step X is removed and the Entry point is unchanged.</desc>
+  <defs>
+    <style>
+      svg {
+        --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --line: #d0d7de;
+        --neutral: #8c959f; --neutral-bg: #f6f8fa;
+        --added: #1a7f37; --added-bg: #dafbe1;
+        --changed: #0969da; --changed-bg: #ddf4ff;
+        --removed: #cf222e; --removed-bg: #ffebe9;
+      }
+      @media (prefers-color-scheme: dark) {
+        svg {
+          --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --line: #3d444d;
+          --neutral: #656c76; --neutral-bg: #151b23;
+          --added: #3fb950; --added-bg: #0f2a1a;
+          --changed: #4493f8; --changed-bg: #0c2441;
+          --removed: #f85149; --removed-bg: #3a1416;
+        }
+      }
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; fill: var(--fg); }
+      .bg { fill: var(--bg); }
+      .title { font-size: 18px; font-weight: 600; }
+      .heading { font-size: 14px; font-weight: 600; }
+      .name { font-weight: 600; }
+      .note { font-size: 12px; fill: var(--muted); }
+      .label { font-size: 12px; }
+      .tag { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; }
+      .panel { fill: none; stroke: var(--line); }
+      .neutral { fill: var(--neutral-bg); stroke: var(--neutral); stroke-width: 1.5; }
+      .added { fill: var(--added-bg); stroke: var(--added); stroke-width: 3; }
+      .changed { fill: var(--changed-bg); stroke: var(--changed); stroke-width: 1.5; }
+      .removed { fill: var(--removed-bg); stroke: var(--removed); stroke-width: 1.5; stroke-dasharray: 8 4; }
+      .t-neutral { fill: var(--muted); }
+      .t-added { fill: var(--added); }
+      .t-changed { fill: var(--changed); }
+      .t-removed { fill: var(--removed); }
+      .flow { fill: none; stroke: var(--fg); stroke-width: 1.5; marker-end: url(#arrow); }
+      .flow-changed { fill: none; stroke: var(--changed); stroke-width: 2; marker-end: url(#arrow-changed); }
+      .head { fill: var(--fg); }
+      .head-changed { fill: var(--changed); }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="head" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+    <marker id="arrow-changed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5.25" markerHeight="5.25" orient="auto-start-reverse">
+      <path class="head-changed" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="960" height="592"/>
+
+  <text class="title" x="24" y="38">Change: Step Y replaces Step X</text>
+  <text class="note" x="24" y="60">PR number · base branch → head commit · placeholder labels: draw only what the diff shows</text>
+
+  <!-- Before -->
+  <rect class="panel" x="16" y="80" width="456" height="420" rx="8"/>
+  <text class="heading" x="32" y="106">Before <tspan class="note" font-weight="400">· base branch</tspan></text>
+
+  <rect class="neutral" x="48" y="126" width="300" height="72" rx="6"/>
+  <text class="tag t-neutral" x="64" y="148">UNCHANGED</text>
+  <text class="name" x="64" y="167">Entry point</text>
+  <text class="note" x="64" y="185">receives the input</text>
+
+  <line class="flow" x1="120" y1="198" x2="120" y2="260"/>
+  <text class="label" x="132" y="234">passes input</text>
+
+  <rect class="removed" x="48" y="262" width="300" height="72" rx="6"/>
+  <text class="tag t-removed" x="64" y="284">REMOVED</text>
+  <text class="name" x="64" y="303">Step X</text>
+  <text class="note" x="64" y="321">the code path this PR deletes</text>
+
+  <line class="flow" x1="120" y1="334" x2="120" y2="396"/>
+  <text class="label" x="132" y="370">writes result</text>
+
+  <rect class="neutral" x="48" y="398" width="300" height="72" rx="6"/>
+  <text class="tag t-changed" x="64" y="420">CHANGED · SEE AFTER</text>
+  <text class="name" x="64" y="439">Store</text>
+  <text class="note" x="64" y="457">keeps the result</text>
+
+  <!-- After -->
+  <rect class="panel" x="488" y="80" width="456" height="420" rx="8"/>
+  <text class="heading" x="504" y="106">After <tspan class="note" font-weight="400">· this PR</tspan></text>
+
+  <rect class="neutral" x="520" y="126" width="300" height="72" rx="6"/>
+  <text class="tag t-neutral" x="536" y="148">UNCHANGED</text>
+  <text class="name" x="536" y="167">Entry point</text>
+  <text class="note" x="536" y="185">receives the input</text>
+
+  <line class="flow" x1="592" y1="198" x2="592" y2="260"/>
+  <text class="label" x="604" y="234">passes input</text>
+
+  <rect class="added" x="520" y="262" width="300" height="72" rx="6"/>
+  <text class="tag t-added" x="536" y="284">ADDED</text>
+  <text class="name" x="536" y="303">Step Y</text>
+  <text class="note" x="536" y="321">the code path this PR adds</text>
+
+  <line class="flow-changed" x1="592" y1="334" x2="592" y2="396"/>
+  <text class="label t-changed" x="604" y="364"><tspan x="604" font-weight="600">CHANGED</tspan><tspan x="604" dy="16">writes result and new field</tspan></text>
+
+  <rect class="changed" x="520" y="398" width="300" height="72" rx="6"/>
+  <text class="tag t-changed" x="536" y="420">CHANGED</text>
+  <text class="name" x="536" y="439">Store</text>
+  <text class="note" x="536" y="457">now also keeps the new field</text>
+
+  <!-- Legend -->
+  <rect class="added" x="32" y="527" width="28" height="16" rx="3"/>
+  <text class="label" x="70" y="539">ADDED · thick solid</text>
+  <rect class="changed" x="264" y="527" width="28" height="16" rx="3"/>
+  <text class="label" x="302" y="539">CHANGED · solid</text>
+  <rect class="removed" x="496" y="527" width="28" height="16" rx="3"/>
+  <text class="label" x="534" y="539">REMOVED · dashed</text>
+  <rect class="neutral" x="728" y="527" width="28" height="16" rx="3"/>
+  <text class="label" x="766" y="539">UNCHANGED · grey</text>
+
+  <line class="flow" x1="32" y1="567" x2="58" y2="567"/>
+  <text class="label" x="70" y="571">flow, labelled with what crosses it</text>
+  <text class="note" x="496" y="571">each part is named in text; colour only repeats it</text>
+</svg>

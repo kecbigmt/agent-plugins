@@ -44,7 +44,7 @@ class ReviewDiagramsPackagingTest(unittest.TestCase):
             load('plugins/review-diagrams/.claude-plugin/plugin.json')['version'],
             load('plugins/review-diagrams/.codex-plugin/plugin.json')['version'],
         }
-        self.assertEqual(versions, {'1.1.0'})
+        self.assertEqual(versions, {'1.2.0'})
 
 
 SKILL = ROOT / 'plugins/review-diagrams/skills/review-diagrams/SKILL.md'
@@ -77,6 +77,25 @@ class ReviewDiagramsSavePathTest(unittest.TestCase):
     def test_checklist_checks_save_location(self):
         checklist = self.paragraph_with('Before sharing, review:')
         self.assertIn('saved where this project keeps diagrams', checklist)
+
+
+EXAMPLES = SKILL.parent / 'examples'
+SAMPLES = ['decision.svg', 'change.svg']
+
+
+class ReviewDiagramsSamplesTest(unittest.TestCase):
+    def test_skill_points_to_each_bundled_sample(self):
+        text = SKILL.read_text()
+        for name in SAMPLES:
+            self.assertIn(f'`examples/{name}`', text)
+            self.assertTrue((EXAMPLES / name).is_file(), name)
+
+    def test_artifact_diagramming_is_optional_and_output_stays_a_committed_svg(self):
+        text = SKILL.read_text()
+        rule = next(p for p in text.split('\n\n') if 'artifact-diagramming' in p)
+        self.assertIn('If the host offers', rule)
+        self.assertIn('commit an SVG file to the repository', rule)
+        self.assertIn('never publishing it as an Artifact', rule)
 
 
 if __name__ == '__main__':
