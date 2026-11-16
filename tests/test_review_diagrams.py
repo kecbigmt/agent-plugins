@@ -44,7 +44,7 @@ class ReviewDiagramsPackagingTest(unittest.TestCase):
             load('plugins/review-diagrams/.claude-plugin/plugin.json')['version'],
             load('plugins/review-diagrams/.codex-plugin/plugin.json')['version'],
         }
-        self.assertEqual(versions, {'1.2.0'})
+        self.assertEqual(versions, {'1.3.0'})
 
 
 SKILL = ROOT / 'plugins/review-diagrams/skills/review-diagrams/SKILL.md'
@@ -96,6 +96,27 @@ class ReviewDiagramsSamplesTest(unittest.TestCase):
         self.assertIn('If the host offers', rule)
         self.assertIn('commit an SVG file to the repository', rule)
         self.assertIn('never publishing it as an Artifact', rule)
+
+
+EMBED = 'https://github.com/<owner>/<repo>/blob/<full-commit-SHA>/<path>?raw=true'
+
+
+class ReviewDiagramsEmbedUrlTest(unittest.TestCase):
+    def test_skill_prescribes_the_blob_raw_embed_for_every_repository(self):
+        text = SKILL.read_text()
+        rule = next(p for p in text.split('\n\n') if '## Overview' in p)
+        self.assertIn(EMBED, rule)
+        self.assertIn('private repositories', rule)
+        self.assertNotIn('raw.githubusercontent.com', text)
+
+    def test_checklist_checks_the_prescribed_embed_form(self):
+        checklist = next(p for p in SKILL.read_text().split('\n\n') if 'Before sharing, review:' in p)
+        self.assertIn('`?raw=true` embeds', checklist)
+
+    def test_readme_agrees_with_the_skill(self):
+        readme = (ROOT / 'README.md').read_text()
+        self.assertIn(EMBED, readme)
+        self.assertNotIn('raw.githubusercontent.com', readme)
 
 
 if __name__ == '__main__':
