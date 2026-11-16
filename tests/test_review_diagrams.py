@@ -1,5 +1,7 @@
 import json
+import re
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
@@ -44,7 +46,7 @@ class ReviewDiagramsPackagingTest(unittest.TestCase):
             load('plugins/review-diagrams/.claude-plugin/plugin.json')['version'],
             load('plugins/review-diagrams/.codex-plugin/plugin.json')['version'],
         }
-        self.assertEqual(versions, {'1.1.0'})
+        self.assertEqual(versions, {'1.2.0'})
 
 
 SKILL = ROOT / 'plugins/review-diagrams/skills/review-diagrams/SKILL.md'
@@ -77,6 +79,56 @@ class ReviewDiagramsSavePathTest(unittest.TestCase):
     def test_checklist_checks_save_location(self):
         checklist = self.paragraph_with('Before sharing, review:')
         self.assertIn('saved where this project keeps diagrams', checklist)
+
+
+SVG = '{http://www.w3.org/2000/svg}'
+EXAMPLES = SKILL.parent / 'examples'
+STATES = {
+    'decision.svg': ['CHOSEN', 'REJECTED', 'DEFERRED', 'SUPERSEDED'],
+    'change.svg': ['ADDED', 'CHANGED', 'REMOVED', 'UNCHANGED'],
+}
+
+
+class ReviewDiagramsSamplesTest(unittest.TestCase):
+    def test_skill_points_to_each_bundled_sample(self):
+        text = SKILL.read_text()
+        for name in STATES:
+            self.assertIn(f'`examples/{name}`', text)
+            self.assertTrue((EXAMPLES / name).is_file(), name)
+
+    def test_samples_are_accessible_themed_svgs(self):
+        for name, states in STATES.items():
+            raw = (EXAMPLES / name).read_text()
+            root = ET.fromstring(raw)
+            self.assertEqual(root.tag, SVG + 'svg', name)
+            self.assertEqual(root.get('aria-labelledby'), 'title desc', name)
+            self.assertTrue(root.find(SVG + 'title').text.strip(), name)
+            self.assertTrue(root.find(SVG + 'desc').text.strip(), name)
+            self.assertIn('@media (prefers-color-scheme: dark)', raw, name)
+            texts = ' '.join(''.join(t.itertext()) for t in root.iter(SVG + 'text'))
+            for state in states:
+                self.assertIn(state, texts, f'{name}: {state}')
+
+    def test_every_sample_arrow_has_a_label(self):
+        for name in STATES:
+            root = ET.fromstring((EXAMPLES / name).read_text())
+            flows = [e for e in root.iter() if re.search(r'\bflow', e.get('class', ''))]
+            labels = [t for t in root.iter(SVG + 'text') if 'label' in t.get('class', '')]
+            self.assertTrue(flows, name)
+            self.assertGreaterEqual(len(labels), len(flows), name)
+
+    def test_samples_carry_no_real_names(self):
+        for name in STATES:
+            raw = (EXAMPLES / name).read_text().lower()
+            for word in ['plect', 'slack', 'kecbigmt', 'idle']:
+                self.assertNotIn(word, raw, f'{name}: {word}')
+
+    def test_artifact_diagramming_is_optional_and_output_stays_a_committed_svg(self):
+        text = SKILL.read_text()
+        rule = next(p for p in text.split('\n\n') if 'artifact-diagramming' in p)
+        self.assertIn('If the host offers', rule)
+        self.assertIn('commit an SVG file to the repository', rule)
+        self.assertIn('never publishing it as an Artifact', rule)
 
 
 if __name__ == '__main__':

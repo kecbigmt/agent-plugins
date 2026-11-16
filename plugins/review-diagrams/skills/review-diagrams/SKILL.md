@@ -5,14 +5,16 @@ description: Draw accurate SVG diagrams for an ADR decision or a substantial PR 
 
 # Review diagrams
 
-Read the ADR or PR diff before drawing. For a tiny PR such as a one-file fix or pin bump, skip the diagram. Save location: use the place the target project's `AGENTS.md` states. Otherwise follow the project's existing pattern, such as committed diagrams or decision records with their own directory and naming scheme: keep that layout, derive file stems from the project's record names, and name the followed pattern in the PR body. Use the defaults below only when neither exists.
+Read the ADR or PR diff first; skip tiny PRs such as a one-file fix or pin bump. Save location: where the target project's `AGENTS.md` says. Otherwise follow the project's existing pattern of committed diagrams or records: keep its layout and naming scheme, derive file stems from its record names, and name that pattern in the PR body. Use the defaults below only when neither exists.
 
-For an ADR, draw the chosen option, responsibility boundaries and labeled data flow. Include rejected alternatives, deferred work, and superseded decisions only when the ADR states them; give each a distinct status label. Save `docs/adr/assets/<adr-name>-<slug>.svg` and embed it in the ADR with a relative image path.
+Before drawing, read the matching sample beside this file, `examples/decision.svg` for an ADR or `examples/change.svg` for a PR, and keep its palette, theme switch and notation unless the project's existing diagrams use another. If the host offers a skill named `artifact-diagramming`, load it for technique; still commit an SVG file to the repository, never publishing it as an Artifact or to any hosted page.
 
-For a PR, compare the base and head. Draw before and after, marking added, changed, and removed parts with distinct colors and explicit text labels. Add a labeled before/after flow if behavior changes. Save `docs/history/changes/<PR>-<slug>/overview.svg`.
+For an ADR, draw the chosen option, responsibility boundaries and labeled data flow. Include rejected alternatives, deferred work, and superseded decisions only when the ADR states them, each with a distinct status label. Save `docs/adr/assets/<adr-name>-<slug>.svg` and embed it in the ADR with a relative image path.
 
-Use SVG text elements with deliberate line breaks; do not rely on collapsed whitespace. Use high-contrast text and fills that remain readable in light and dark themes. Label every arrow with what crosses it. Never depict a claim absent from the source text or diff. Use an accessible title and description.
+For a PR, draw base (before) and head (after), marking added, changed, and removed parts with distinct colors and text labels, plus a labeled flow if behavior changes. Save `docs/history/changes/<PR>-<slug>/overview.svg`.
 
-Put `## Overview` at the top of the PR body, embedding each diagram through a `raw.githubusercontent.com/<owner>/<repo>/<full-commit-SHA>/<path>` URL. Refresh the SHA and URLs after every push.
+Break lines with explicit `tspan`s, never collapsed whitespace. Label every arrow with what crosses it. Depict no claim absent from the source text or diff. Add an accessible title and description.
 
-Before sharing, review: Are all claims supported? Are chosen, rejected, deferred, and superseded states distinct? Are boundaries and every arrow clear, with no crossed arrows or labels clipped by boxes? Are before/after and add/change/remove labels correct? Is text legible at normal zoom in both themes? Is each diagram saved where this project keeps diagrams? Do paths, embeds, and pinned PR URLs resolve?
+Put `## Overview` at the top of the PR body, embedding each diagram through a `raw.githubusercontent.com/<owner>/<repo>/<full-commit-SHA>/<path>` URL. Refresh them after every push.
+
+Before sharing, review: Are all claims supported? Are chosen, rejected, deferred, and superseded states distinct? Are boundaries clear and every arrow labeled, with no crossings or clipped labels? Are before/after and add/change/remove labels correct? Is text legible at normal zoom in both themes? Is each diagram saved where this project keeps diagrams? Do paths, embeds, and pinned PR URLs resolve?
