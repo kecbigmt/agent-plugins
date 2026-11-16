@@ -5,7 +5,7 @@ description: Draw accurate SVG diagrams for an ADR decision or a substantial PR 
 
 # Review diagrams
 
-Read the ADR or PR diff before drawing. For a tiny PR such as a one-file fix or pin bump, skip the diagram. Follow placement overrides in the target project's `AGENTS.md`.
+Read the ADR or PR diff before drawing. For a tiny PR such as a one-file fix or pin bump, skip the diagram. Save location: use the place the target project's `AGENTS.md` states. Otherwise follow the project's existing pattern, such as committed diagrams or decision records with their own directory and naming scheme: keep that layout, derive file stems from the project's record names, and name the followed pattern in the PR body. Use the defaults below only when neither exists.
 
 For an ADR, draw the chosen option, responsibility boundaries and labeled data flow. Include rejected alternatives, deferred work, and superseded decisions only when the ADR states them; give each a distinct status label. Save `docs/adr/assets/<adr-name>-<slug>.svg` and embed it in the ADR with a relative image path.
 
@@ -15,4 +15,4 @@ Use SVG text elements with deliberate line breaks; do not rely on collapsed whit
 
 Put `## Overview` at the top of the PR body, embedding each diagram through a `raw.githubusercontent.com/<owner>/<repo>/<full-commit-SHA>/<path>` URL. Refresh the SHA and URLs after every push.
 
-Before sharing, review: Are all claims supported? Are chosen, rejected, deferred, and superseded states distinct? Are boundaries and every arrow clear, with no crossed arrows or labels clipped by boxes? Are before/after and add/change/remove labels correct? Is text legible at normal zoom in both themes? Do paths, embeds, and pinned PR URLs resolve?
+Before sharing, review: Are all claims supported? Are chosen, rejected, deferred, and superseded states distinct? Are boundaries and every arrow clear, with no crossed arrows or labels clipped by boxes? Are before/after and add/change/remove labels correct? Is text legible at normal zoom in both themes? Is each diagram saved where this project keeps diagrams? Do paths, embeds, and pinned PR URLs resolve?
