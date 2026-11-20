@@ -5,16 +5,16 @@ description: Draw accurate SVG diagrams for an ADR decision or a substantial PR 
 
 # Review diagrams
 
-Read the ADR or PR diff first; skip tiny PRs (one-file fix, pin bump). Save location: where the project's `AGENTS.md` says. Otherwise follow the project's existing pattern of committed diagrams or records: keep its layout and naming scheme, derive file stems from its record names, and name that pattern in the PR body. Use the defaults below only if neither exists.
+Read the ADR or PR diff first; skip tiny PRs. Save location: per the project's `AGENTS.md`. Otherwise follow the existing pattern of committed diagrams or records (layout, naming scheme, file stems from record names), naming it in the PR body; else the defaults below.
 
-Before drawing, read the matching sample beside this file (`examples/decision.svg` for an ADR, `examples/change.svg` for a PR) and keep its palette, theme switch and notation unless the project's existing diagrams use another. If the host offers an `artifact-diagramming` skill, load it for technique; still commit an SVG file to the repository, never publishing it as an Artifact or any hosted page.
+First read the sample beside this file (`examples/decision.svg` for an ADR, `examples/change.svg` for a PR) and reuse its palette, theme switch and notation unless the project's diagrams differ. If the host offers an `artifact-diagramming` skill, load it for technique; still commit an SVG file to the repository, never publishing it as an Artifact.
 
-For an ADR, draw the chosen option, responsibility boundaries and labeled data flow. Include rejected alternatives, deferred work, and superseded decisions only when the ADR states them, each with a distinct status label. Save `docs/adr/assets/<adr-name>-<slug>.svg` and embed it in the ADR by relative path.
+For an ADR, draw the chosen option, responsibility boundaries and data flow. Show rejected, deferred, and superseded options only when the ADR states them, each with a distinct status label. Save `docs/adr/assets/<adr-name>-<slug>.svg` and embed it in the ADR by relative path.
 
-For a PR, draw base (before) and head (after), marking added, changed, and removed parts with distinct colors and text labels, plus a labeled flow if behavior changes. Save `docs/history/changes/<PR>-<slug>/overview.svg`.
+For a PR, draw one picture of the head structure. Boxes are real components (process, service, module, store, session): a name, at most a short qualifier, no sentences; explain in the PR body. Mark the diff: added and changed parts in distinct colors with text labels, removed parts as faded dashed ghosts in their old place. Draw a before picture only if the structure's shape changes; say why. Save `docs/history/changes/<PR>-<slug>/overview.svg`.
 
-Break lines with explicit `tspan`s, never collapsed whitespace. Label every arrow with what crosses it. Depict no claim absent from the source text or diff. Add an accessible title and description.
+Label every arrow with what crosses it (message, event, file, call). Break lines with explicit `tspan`s. Add `<title>` and `<desc>`.
 
-Open the PR body with `## Overview`, embedding each diagram as `https://github.com/<owner>/<repo>/blob/<full-commit-SHA>/<path>?raw=true`, which renders in private repositories. Refresh after every push.
+Open the PR body with `## Overview`, embedding each diagram as `https://github.com/<owner>/<repo>/blob/<full-commit-SHA>/<path>?raw=true` (renders in private repositories); refresh per push.
 
-Before sharing, review: Are all claims supported? Are chosen, rejected, deferred, and superseded states distinct? Are boundaries clear and every arrow labeled, with no crossings or clipped labels? Are before/after and add/change/remove labels correct? Is text legible at normal zoom in both themes? Is each diagram saved where this project keeps diagrams? Do paths, `?raw=true` embeds, and pinned PR URLs resolve?
+Before sharing, review: Is every claim in the source or diff? Could a bullet list replace the diagram without losing information? If so, redraw. Are statuses distinct and correctly labeled? No crossings or clipped labels? Is text legible in both themes? Is each diagram saved where this project keeps diagrams? Do paths, `?raw=true` embeds, and pinned PR URLs resolve?
