@@ -44,7 +44,7 @@ class ReviewDiagramsPackagingTest(unittest.TestCase):
             load('plugins/review-diagrams/.claude-plugin/plugin.json')['version'],
             load('plugins/review-diagrams/.codex-plugin/plugin.json')['version'],
         }
-        self.assertEqual(versions, {'1.3.0'})
+        self.assertEqual(versions, {'1.4.0'})
 
 
 SKILL = ROOT / 'plugins/review-diagrams/skills/review-diagrams/SKILL.md'
@@ -96,6 +96,39 @@ class ReviewDiagramsSamplesTest(unittest.TestCase):
         self.assertIn('If the host offers', rule)
         self.assertIn('commit an SVG file to the repository', rule)
         self.assertIn('never publishing it as an Artifact', rule)
+
+
+class ReviewDiagramsChangeDiagramTest(unittest.TestCase):
+    def setUp(self):
+        self.paragraphs = SKILL.read_text().split('\n\n')
+
+    def paragraph_with(self, phrase):
+        return next(p for p in self.paragraphs if phrase in p)
+
+    def test_pr_rule_asks_for_one_head_structure_picture_with_the_diff_marked(self):
+        rule = self.paragraph_with('For a PR')
+        self.assertIn('one picture of the head structure', rule)
+        self.assertIn('real components', rule)
+        self.assertIn('no sentences', rule)
+        self.assertIn('Mark the diff', rule)
+        self.assertIn('faded dashed ghosts', rule)
+        self.assertIn('before picture only if the structure', rule)
+        self.assertNotIn('base (before) and head (after)', SKILL.read_text())
+
+    def test_every_arrow_says_what_crosses_it(self):
+        rule = self.paragraph_with('Label every arrow')
+        self.assertIn('what crosses it (message, event, file, call)', rule)
+
+    def test_checklist_asks_the_bullet_list_question(self):
+        checklist = self.paragraph_with('Before sharing, review:')
+        self.assertIn('Could a bullet list replace the diagram without losing information?', checklist)
+        self.assertIn('redraw', checklist)
+
+    def test_adr_rule_is_kept(self):
+        rule = self.paragraph_with('For an ADR')
+        for phrase in ['chosen option', 'responsibility boundaries', 'rejected', 'deferred',
+                       'superseded', 'distinct status label', 'docs/adr/assets/']:
+            self.assertIn(phrase, rule)
 
 
 EMBED = 'https://github.com/<owner>/<repo>/blob/<full-commit-SHA>/<path>?raw=true'

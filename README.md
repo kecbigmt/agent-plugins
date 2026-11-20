@@ -43,7 +43,7 @@ Story-driven Development workflow plugin for Claude Code. Provides skills and co
 
 ### review-diagrams
 
-The shared `review-diagrams` skill creates SVG decision diagrams for ADRs and change diagrams for substantial PRs. It checks claims against the source, labels flows, and makes before/after changes easy to review. Tiny PRs can skip a diagram. Sample decision and change diagrams ship in `skills/review-diagrams/examples/` as a starting palette and notation. PR bodies embed each diagram as `https://github.com/<owner>/<repo>/blob/<full-commit-SHA>/<path>?raw=true`, which also renders in private repositories.
+The shared `review-diagrams` skill creates SVG decision diagrams for ADRs and change diagrams for substantial PRs. It checks claims against the source and labels every arrow with what crosses it. A change diagram is one picture of the head structure with added, changed and removed parts marked on it, not a before/after pair of text boxes. Tiny PRs can skip a diagram. Sample decision and change diagrams ship in `skills/review-diagrams/examples/` as a starting palette and notation. PR bodies embed each diagram as `https://github.com/<owner>/<repo>/blob/<full-commit-SHA>/<path>?raw=true`, which also renders in private repositories.
 
 ### codex
 
